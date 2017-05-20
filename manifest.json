@@ -1,0 +1,57 @@
+{
+	"manifest_version": 2,
+	"name": "YouTube-Anmerkungen kopieren",
+	"description": "Dieses Plugin ermöglicht das einfache kopieren & bearbeiten von YouTube-Anmerkungen.",
+	"version": "0.0.41",
+	"author": "ZSleyer",
+	"homepage_url": "http://ZSleyer.de/",
+	"icons": {
+        "128": 	"img/128-yta.png"
+	},
+	"background": {
+      "page": "background.html",
+      "persistent": false
+   },
+	"browser_action": {
+		"default_icon": {
+			"19": "img/19-yta.png",
+			"38": "img/38-yta.png"
+		},
+		"default_title": "YouTube-Anmerkungen kopieren"
+	},
+	"permissions": [
+		"webNavigation",
+		"background",
+		"tabs",
+		"cookies",
+		"*://*.youtube.com/*",
+		"*://youtube.com/*",
+		"*://yta.zsleyer.de/*"
+	],
+	"content_scripts": [
+		{
+			"matches": [ 
+				"*://yta.zsleyer.de/*"
+			],
+			"js": [
+				"js/jquery.js",
+				"js/jquery_cookie.js",
+				"js/yta.js"
+			],
+			"run_at": "document_end",
+			"all_frames": true
+		},
+		{
+			"matches": [
+				"*://*.youtube.com/my_videos*"
+			],
+			"js": [
+				"js/jquery.js",
+				"js/yta-yt-manger.js"
+			],
+			"run_at": "document_end",
+			"all_frames": true
+		}
+	],
+	"minimum_chrome_version" : "45"
+}
